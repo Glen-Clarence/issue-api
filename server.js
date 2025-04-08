@@ -11,8 +11,9 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? ["https://mongodb-production-966c.up.railway.app/"] // You'll update this with your actual frontend domain
-        : ["http://localhost:3000"],
+        ? "https://your-frontend-domain.vercel.app"
+        : "http://localhost:3000",
+    credentials: true, // Only needed if you're sending cookies/auth headers
   })
 );
 app.use(bodyParser.json());
