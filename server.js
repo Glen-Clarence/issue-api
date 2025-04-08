@@ -7,15 +7,7 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(
-  cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://your-frontend-domain.vercel.app"
-        : "http://localhost:3000",
-    credentials: true, // Only needed if you're sending cookies/auth headers
-  })
-);
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
