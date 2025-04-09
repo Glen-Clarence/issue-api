@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Milestone = require("../models/Milestone");
+const { auth } = require("../middleware/auth");
+const isSuperAdmin = require("../middleware/isSuperAdmin");
 
 // Get all milestones
-router.get("/", async (req, res) => {
+router.get("/", auth, isSuperAdmin, async (req, res) => {
   try {
     const milestones = await Milestone.find().sort({ createdAt: -1 });
     res.json(milestones);
@@ -13,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get single milestone
-router.get("/:id", async (req, res) => {
+router.get("/:id", auth, isSuperAdmin, async (req, res) => {
   try {
     const milestone = await Milestone.findById(req.params.id);
     if (!milestone)
@@ -25,7 +27,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create milestone
-router.post("/", async (req, res) => {
+router.post("/", auth, isSuperAdmin, async (req, res) => {
   const milestone = new Milestone({
     title: req.body.title,
     description: req.body.description,
@@ -41,7 +43,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update milestone
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", auth, isSuperAdmin, async (req, res) => {
   try {
     const milestone = await Milestone.findById(req.params.id);
     if (!milestone)
@@ -62,7 +64,7 @@ router.patch("/:id", async (req, res) => {
 });
 
 // Delete milestone
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, isSuperAdmin, async (req, res) => {
   try {
     const milestone = await Milestone.findById(req.params.id);
     if (!milestone)

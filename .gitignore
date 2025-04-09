@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Uploads directory
+uploads/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
